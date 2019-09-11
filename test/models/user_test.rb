@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   # @user available in all tests, use 'setup' which auto-runs before each test
   def setup
-  	@user = User.new(name: "Example User", email: "user@example.com")
+  	@user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -64,5 +64,17 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     # reload method reloads data from DB, which causes problems without using "before_save in User model"
     assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+
+  # password can't be blank
+  test "password should be present (nonblank)" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  # password has to be at least 6 chars
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
   end
 end
