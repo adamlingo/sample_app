@@ -19,6 +19,22 @@ class UsersController < ApplicationController
     end
   end
 
+	def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+  	@user = User.find(params[:id])
+  	if @user.update(user_params)
+  		puts "******************EDIT******************"
+  		flash[:success] = "Profile info updated!"
+  		redirect_to @user
+  	else
+  		# render edit form on unsuccessful settings update for User
+  		render 'edit'
+  	end
+  end
+
   private
 
   	def user_params
