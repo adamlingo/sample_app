@@ -63,11 +63,28 @@ RSpec.describe User, type: :model do
 	  	expect(mixed_case_email.downcase).to eq(@user.reload.email)
 	  end
 
+	  it 'ensures password is not blank' do
+	  	@user.password = @user.password_confirmation = " "  * 6
+	  	# invalid password will make entire @user record invalid
+	  	expect(@user).to_not be_valid
+	  end
+
+	  it 'ensures password has minimum length' do
+	  	@user.password = @user.password_confirmation = "a" * 5
+	  	# invalid (too short) password makes @user not valid
+	  	expect(@user).to_not be_valid
+	  end
+
+	  it 'asserts authenticated? should return false for a user with nil digest' do
+	  	expect(@user.authenticated?('')).to_not eq(true)
+	  end
+
 	  ## more later, currently all pass
   	
   end
 
   context 'scope tests' do
-  	# find more scope tests worth writing.
+  	# find more scope tests worth writing, even though the creator of RSpec finds them
+  	# unnecessary if your behavioral tests pass.
   end
 end
