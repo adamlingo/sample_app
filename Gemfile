@@ -35,6 +35,8 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # load rspec to work on conversions from mini-test
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -57,6 +59,8 @@ group :test do
   gem 'minitest-reporters', '>= 1.3.8'
   gem 'guard', '>= 2.15.0'
   gem 'guard-minitest', '>= 2.4.6'
+  # Simple cov to monitor coverage ratio in program
+  gem 'simplecov', require: false
 end
 
 group :production do
