@@ -7,7 +7,6 @@ RSpec.describe UsersController, type: :controller do
 	context 'GET #show' do
 		it 'routes /users/1 to user_path' do
 			expect(get: user_path(@user.id)).to route_to(controller: "users", action: "show", id: "1")
-			
 		end
 	end
 
