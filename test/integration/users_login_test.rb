@@ -2,8 +2,8 @@ require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
 	def setup
-		# uses test/fixtures "Michael" fixture
-		@user = users(:michael)
+		# uses test/fixtures "Adam" fixture
+		@user = users(:adam)
 	end
 	# For INVALID info, test:
 	
